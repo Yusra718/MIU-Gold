@@ -1,0 +1,58 @@
+/*
+Yusra Ahmed
+Project 2: Web App Part 2
+Visual Frameworks Term 1211
+*/
+
+body{
+	background: #69dcad;
+	margin: 10px;
+	border: solid black;
+    padding: 15px;
+    width: 270px;
+    overflow: scroll;
+}
+
+fieldset{
+	border: 3px;
+	border: double black;
+}
+
+header{
+	display: block;
+}
+
+h1{
+	display: inline-block;
+}
+
+a:hover {
+    color: #fff;
+}
+
+input:focus {
+    border: inset #666;
+}
+
+textarea{
+	display: block;
+}
+
+textarea:focus {
+    border: inset #666;
+}
+
+input#save {
+    background: #a8ff79;
+    border: inherit #5ea6a5;
+}
+
+input#save:hover {
+    background: #76ff2c;
+    border: solid #4ace02;
+}
+
+input#save:active {
+    background: #68b240;
+    border: inherit #1aafad;
+}
