@@ -116,7 +116,7 @@ window.addEventListener("DOMContentLoaded", function() {
 	function saveData(key){
 
 		if(!key){
-            var id = Math.floor(Math.random()*1000001);
+            var id = today.getTime();
         } else {
             id = key;
         }
@@ -133,16 +133,33 @@ window.addEventListener("DOMContentLoaded", function() {
             decor.notes = ["Notes: ", getId("notes").value];
             decor.typePack = ["Business/Personal: ", getId("packAmount").value];
             decor.packs = ["How many packs? : ", getId("howMany").value];
-            decor.saveTime = ["Saved: ", today.getTime()]
 		localStorage.setItem(id, JSON.stringify(decor));
 		alert("Saved!");
 	};
+
+    function arrangingStorage(){
+        if(localStorage.length >=1){
+            var localArray = [];
+            for (var i=0, j=i+1; i<localStorage.length;i++){
+                if(localStorage(i).key>localStorage(j).key){
+                    localStorage(i).insertBefore(localStorage(j))
+                } else if(localStorage(j).key>localStorage(i).key){
+                    localStorage(j).insertBefore(localStorage(i))
+                }
+                localArray.push(localStorage.key(i));
+            }
+        }
+        var sortData = localArray.reverse();
+        return sortData;
+    }
 
 	function getData(){
 		toggleDisplay("on");
         if(localStorage.length === 0){
             alert("You have not added any data, so default data was added.");
             defaultData();
+        } else if(localStorage.length >=1){
+            arrangingStorage();
         }
         var makeDiv = document.createElement("div");
         makeDiv.setAttribute("id", "decor");
@@ -169,6 +186,66 @@ window.addEventListener("DOMContentLoaded", function() {
             makeItemLinks(localStorage.key(i), links);
         }
 	};
+
+    function newData(){
+        var newPage = getId("newItems");
+        if(localStorage.length === 0){
+            var newp = document.createElement("p");
+            var pText =  document.createTextNode("There are no new items");
+            newp.appendChild(pText);
+            newPage.appendChild(newp);
+        } else if(localStorage.length >=1){
+            arrangingStorage();
+            var newList = document.createElement("ul");
+            newPage.appendChild(newList);
+            for(var i=0, j=3; i<j; i++){
+                var makeli = document.createElement("li");
+                var links = document.createElement("li");
+                newList.appendChild(makeli);
+                var key = localStorage.key(i);
+                var value = localStorage.getItem(key);
+                var obj = JSON.parse(value);
+                var makeSubList = document.createElement("ul");
+                makeli.appendChild(makeSubList);
+                storeImage(obj.dectype[1], makeSubList);
+                for (var n in obj){
+                    var makeSubli = document.createElement("li");
+                    makeSubList.appendChild(makeSubli);
+                    var optSubText = obj[n][0]+" "+obj[n][1];
+                    makeSubli.innerHTML = optSubText;
+                    makeSubList.appendChild(links);
+                }
+                makeItemLinks(localStorage.key(i), links);
+            }
+        }
+    }
+
+    function toggleCS(){
+        if (getId("type").value == "Tinsel" || getId("type").value == "Lights"){
+            getId("colorStyleButton").style.display = "none";
+        } else {
+            getId("colorStyleButton").style.display = "block";
+        }
+
+        for(var i=1, j=getId("type").length; i<j; i++){
+            getId("selectColors").appendChild(getId("colors"));
+            getId("page5").style.display = "none"
+            if (getId("type").value == "Lights"){
+                getId("blackli").style.display = "none";
+                getId("greyli").style.display = "none";
+            } else{
+                getId("blackli").style.display = "block";
+                getId("greyli").style.display = "block";
+            }
+        }
+
+
+        //     for(var k=0, m=getId("colors").length; k<m; k++){
+        //         var imageID = getId("colors")[k].value + "Image";
+        //         getID(imageID).setAttribute("src", "Img/" + getId("type")[i].value + "Colors/" + getId("colors")[k].value + getId("type")[i].value + ".jpeg");
+        //     }
+        // }
+    }    
 
     function editDisplay(){
         var displayArray = [getId("decorateTypeForm"), getId("colorType"), getId("colorPerPiece"), getId("colorForm"), getId("saveForm"), getId("extraForm"), getId("save")];
@@ -404,5 +481,6 @@ window.addEventListener("DOMContentLoaded", function() {
     save.addEventListener("click", validate);
 	displayData.addEventListener("click", getData);
 	clear.addEventListener("click", clearData);
+    newData();
 
 });
