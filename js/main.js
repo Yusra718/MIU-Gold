@@ -35,34 +35,31 @@ window.addEventListener("DOMContentLoaded", function() {
         colorAmountValue,
         myColors = [blue, green, red, pink, purple, orange, black, white, yellow, grey],
         errorList = getId("error"),
-        colors = [];
+        colors = [],
+        localArray = [];
 
     function toggleDisplay(n){
         switch(n){
             case "on":
+                getId("new").style.display = "none";
                 getId("page1").style.display = "none";
-                getId("page2").style.display = "none";
-                getId("page3").style.display = "none";
-                getId("page4").style.display = "none";
-                getId("page5").style.display = "none";
-                getId("page6").style.display = "none";
-                getId("page7").style.display = "none";
                 getId("displayPage").style.display = "none";
                 clear.style.display = "inline";
                 displayData.style.display = "none";
                 getId("addItem").style.display = "inline";
                 break;
             case "off":
-                getId("page1").style.display = "none";
-                getId("page2").style.display = "none";
-                getId("page3").style.display = "none";
-                getId("page4").style.display = "none";
-                getId("page5").style.display = "none";
-                getId("page6").style.display = "none";
-                getId("page7").style.display = "none";
+                // getId("new").style.display = "block";
+                // getId("decorateTypeForm").style.display = "block";
+                // getId("colorType").style.display = "block";
+                // getId("colorPerPiece").style.display = "block";
+                // getId("colors").style.display = "block";
+                // getId("order").style.display = "block";
+                // getId("extraForm").style.display = "block";
+                // getId("page1").style.display = "block";
                 getId("displayPage").style.display = "block";
-                clear.style.display = "inline";
-                displayData.style.display = "inline";
+                clear.style.display = "inline-block";
+                displayData.style.display = "inline-block";
                 getId("addItem").style.display = "none";
                 getId("decor").style.display = "none";
                 break;
@@ -113,10 +110,20 @@ window.addEventListener("DOMContentLoaded", function() {
         }
     };
 
+    function defaultData(){
+        for(var d in json){
+            localArray.push(json[d]);
+            var id = Math.floor(Math.random()*10000001);
+            for(var i=0, j=localArray.length; i<j; i++){
+                localStorage.setItem(id, JSON.stringify(localArray[i]));
+            }
+        }
+    }
+
 	function saveData(key){
 
 		if(!key){
-            var id = today.getTime();
+            var id = Math.floor(Math.random()*10000001);
         } else {
             id = key;
         }
@@ -133,33 +140,18 @@ window.addEventListener("DOMContentLoaded", function() {
             decor.notes = ["Notes: ", getId("notes").value];
             decor.typePack = ["Business/Personal: ", getId("packAmount").value];
             decor.packs = ["How many packs? : ", getId("howMany").value];
-		localStorage.setItem(id, JSON.stringify(decor));
-		alert("Saved!");
-	};
-
-    function arrangingStorage(){
-        if(localStorage.length >=1){
-            var localArray = [];
-            for (var i=0, j=i+1; i<localStorage.length;i++){
-                if(localStorage(i).key>localStorage(j).key){
-                    localStorage(i).insertBefore(localStorage(j))
-                } else if(localStorage(j).key>localStorage(i).key){
-                    localStorage(j).insertBefore(localStorage(i))
-                }
-                localArray.push(localStorage.key(i));
-            }
-        }
-        var sortData = localArray.reverse();
-        return sortData;
-    }
+        localArray.push(decor);
+        for(var i=0, j=localArray.length; i<j; i++){
+    		localStorage.setItem(id, JSON.stringify(localArray[i]));
+    		alert("Saved!");
+	    }
+    };
 
 	function getData(){
-		toggleDisplay("on");
+        toggleDisplay("on");
         if(localStorage.length === 0){
             alert("You have not added any data, so default data was added.");
             defaultData();
-        } else if(localStorage.length >=1){
-            arrangingStorage();
         }
         var makeDiv = document.createElement("div");
         makeDiv.setAttribute("id", "decor");
@@ -185,7 +177,23 @@ window.addEventListener("DOMContentLoaded", function() {
             }
             makeItemLinks(localStorage.key(i), links);
         }
-	};
+    };
+
+    // function arrangingStorage(){
+    //     if(localStorage.length >=1){
+    //         var localArray = [];
+    //         for (var i=0, j=i+1; i<localStorage.length;i++){
+    //             if(localStorage(i).key>localStorage(j).key){
+    //                 localStorage(i).insertBefore(localStorage(j))
+    //             } else if(localStorage(j).key>localStorage(i).key){
+    //                 localStorage(j).insertBefore(localStorage(i))
+    //             }
+    //             localArray.push(localStorage.key(i));
+    //         }
+    //     }
+    //     var sortData = localArray.reverse();
+    //     return sortData;
+    // }
 
     function newData(){
         var newPage = getId("newItems");
@@ -195,7 +203,6 @@ window.addEventListener("DOMContentLoaded", function() {
             newp.appendChild(pText);
             newPage.appendChild(newp);
         } else if(localStorage.length >=1){
-            arrangingStorage();
             var newList = document.createElement("ul");
             newPage.appendChild(newList);
             for(var i=0, j=3; i<j; i++){
@@ -222,33 +229,45 @@ window.addEventListener("DOMContentLoaded", function() {
 
     function toggleCS(){
         if (getId("type").value == "Tinsel" || getId("type").value == "Lights"){
-            getId("colorStyleButton").style.display = "none";
+            getId("colorStyle").style.display = "none";
         } else {
-            getId("colorStyleButton").style.display = "block";
+            getId("colorStyle").style.display = "block";
+        }
+
+        if (getId("type").value == "Lights"){
+            getId("blackli").style.display = "none";
+            getId("greyli").style.display = "none";
+        } else{
+            getId("blackli").style.display = "block";
+            getId("greyli").style.display = "block";
         }
 
         for(var i=1, j=getId("type").length; i<j; i++){
-            getId("selectColors").appendChild(getId("colors"));
-            getId("page5").style.display = "none"
-            if (getId("type").value == "Lights"){
-                getId("blackli").style.display = "none";
-                getId("greyli").style.display = "none";
-            } else{
-                getId("blackli").style.display = "block";
-                getId("greyli").style.display = "block";
+            for(var k=0, m=myColors.length; k<m; k++){
+                if(getId("type").value == "Tinsel"){
+                    var imageID = myColors[k].value + "Image";
+                    getId(imageID).setAttribute("src", "Img/TinselColors/" + myColors[k].value + "Tinsel.jpeg");
+                } else if(getId("type").value == "Lights"){
+                    var imageID = myColors[k].value + "Image";
+                    getId(imageID).setAttribute("src", "Img/LightsColors/" + myColors[k].value + "Lights.jpeg");
+                } else if(getId("type").value == "Ceiling"){
+                    var imageID = myColors[k].value + "Image";
+                    getId(imageID).setAttribute("src", "Img/CeilingColors/" + myColors[k].value + "Ceiling.jpeg");
+                } else if(getId("type").value == "Balloons"){
+                    var imageID = myColors[k].value + "Image";
+                    getId(imageID).setAttribute("src", "Img/BalloonsColors/" + myColors[k].value + "Balloons.jpeg");
+                } else if(getId("type").value == "Banners"){
+                    var imageID = myColors[k].value + "Image";
+                    getId(imageID).setAttribute("src", "Img/BannersColors/" + myColors[k].value + "Banners.jpeg");
+                }
             }
         }
 
-
-        //     for(var k=0, m=getId("colors").length; k<m; k++){
-        //         var imageID = getId("colors")[k].value + "Image";
-        //         getID(imageID).setAttribute("src", "Img/" + getId("type")[i].value + "Colors/" + getId("colors")[k].value + getId("type")[i].value + ".jpeg");
-        //     }
-        // }
     }    
 
     function editDisplay(){
-        var displayArray = [getId("decorateTypeForm"), getId("colorType"), getId("colorPerPiece"), getId("colorForm"), getId("saveForm"), getId("extraForm"), getId("save")];
+        getId("displayData").style.display = "block";
+        var displayArray = [getId("select"), getId("colorType"), getId("colorPerPiece"), getId("colors"), getId("saveForm"), getId("extraForm")];
         var editUl = document.createElement("ul");
         var displayPage = getId("displayPage");
         for(var i=0, j=displayArray.length; i<j; i++){
@@ -288,60 +307,40 @@ window.addEventListener("DOMContentLoaded", function() {
         remove.style.display = "block"
     }
 
-    function toggleCS(){
-        if (getId("type").value == "Tinsel" || getId("type").value == "Lights"){
-            getId("colorStyleButton").style.display = "none";
-        } else {
-            getId("colorStyleButton").style.display = "block";
-        }
-
-        for(var i=1, j=getId("type").length; i<j; i++){
-            getId("select").appendChild(getId("colors"));
-            if (getId("type").value == "Lights"){
-                getId("blackli").style.display = "none";
-                getId("greyli").style.display = "none";
-            } else{
-                getId("blackli").style.display = "block";
-                getId("greyli").style.display = "block";
-            }
-        }
-
-
-        //     for(var k=0, m=getId("colors").length; k<m; k++){
-        //         var imageID = getId("colors")[k].value + "Image";
-        //         getID(imageID).setAttribute("src", "Img/" + getId("type")[i].value + "Colors/" + getId("colors")[k].value + getId("type")[i].value + ".jpeg");
-        //     }
-        // }
-    }
-
     function editItem() {
         var value = localStorage.getItem(this.key);
         var decor = JSON.parse(value);
 
         toggleDisplay("off");
+        editDisplay();
 
         getId("type").value = decor.dectype[1];
         
+        if(getId("type").value == "Tinsel" || getId("type").value == "Lights"){
+            getId("colorType").style.display = "none";
+        } else {
+            getId("colorType").style.display = "block";
+        }
 
-            if(getId("type").value == "Balloons" || getId("type").value == "Ceiling" || getId("type").value == "Banners"){
-                var colorTypeRadios = $("input:radio[name=colorStyle]");
-                for(var i=0, j=colorTypeRadios.length; i<j; i++){
-                    if(colorTypeRadios[i].value == "Metallic" && decor.colorType[1] == "Metallic"){
-                        colorTypeRadios[i].setAttribute("checked", "checked");
-                    } else if(colorTypeRadios[i].value == "Regular" && decor.colorType[1] == "Regular"){
-                        colorTypeRadios[i].setAttribute("checked", "checked");
-                    }
+        if(getId("type").value == "Balloons" || getId("type").value == "Ceiling" || getId("type").value == "Banners"){
+            var colorTypeRadios = $("input:radio[name=colorStyle]");
+            for(var i=0, j=colorTypeRadios.length; i<j; i++){
+                if(colorTypeRadios[i].value == "Metallic" && decor.colorType[1] == "Metallic"){
+                    colorTypeRadios[i].setAttribute("checked", "checked");
+                } else if(colorTypeRadios[i].value == "Regular" && decor.colorType[1] == "Regular"){
+                    colorTypeRadios[i].setAttribute("checked", "checked");
                 }
             }
+        }
 
-            var colorRadios = $("input:radio[name=colorAmount]");
-            for(var i=0, j=colorRadios.length; i<j; i++){
-                if(colorRadios[i].value == "Multiple Colors" && decor.colorAmount[1] == "Multiple Colors"){
-                    colorRadios[i].setAttribute("checked", "checked");
-                } else if(colorRadios[i].value == "Separate Colors" && decor.colorAmount[1] == "Separate Colors"){
-                    colorRadios[i].setAttribute("checked", "checked");
-                }
+        var colorRadios = $("input:radio[name=colorAmount]");
+        for(var i=0, j=colorRadios.length; i<j; i++){
+            if(colorRadios[i].value == "Multiple Colors" && decor.colorAmount[1] == "Multiple Colors"){
+                colorRadios[i].setAttribute("checked", "checked");
+            } else if(colorRadios[i].value == "Separate Colors" && decor.colorAmount[1] == "Separate Colors"){
+                colorRadios[i].setAttribute("checked", "checked");
             }
+        }
 
         for(var k=0, l=decor.colors[1].length; k<l; k++){
             for(var i=0, j=myColors.length; i<j; i++){
@@ -351,20 +350,18 @@ window.addEventListener("DOMContentLoaded", function() {
             }
         }
 
-        getId("packAmount").value = decor.typePack[1];
         getId("occasion").value = decor.occasion[1];
         getId("notes").value = decor.notes[1];
+        getId("packAmount").value = decor.typePack[1];
         getId("howMany").value = decor.packs[1];
         sliderChange(getId("howMany").value);
         
-
-        editDisplay();
-
         save.removeEventListener("click", validate);
         getId("save").value = "Edit Item";
         var editSave = getId("save");
         editSave.addEventListener("click", validate);
         editSave.key = this.key;
+
 
     }
 
@@ -456,12 +453,7 @@ window.addEventListener("DOMContentLoaded", function() {
         }   
     }
 
-    function defaultData(){
-        for(var d in json){
-            var id = Math.floor(Math.random()*10000001);
-            localStorage.setItem(id, JSON.stringify(json[d]));
-        }
-    }
+
 
 	function clearData() {
         if (localStorage.length === 0) {
@@ -476,7 +468,7 @@ window.addEventListener("DOMContentLoaded", function() {
     }
 
   	makeType();
-    getId("type").addEventListener("click", toggleCS)
+    getId("select").addEventListener("click", toggleCS)
     save.addEventListener("click", colorsPush);
     save.addEventListener("click", validate);
 	displayData.addEventListener("click", getData);

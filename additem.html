@@ -9,10 +9,9 @@
         <meta name="viewport" content="user-scalable=no, width=device-width" />
         <title>The Holiday Spirit</title>
         <link href="css/styles.css" rel="stylesheet"/>
-        <link href="css/jquery.mobile-1.2.0.css" rel="stylesheet"/>
-        <script src="js/jquery-1.9.1.js" type="text/javascript"></script>
-        <script src="js/jquery-migrate-1.1.0.js" type="text/javascript"></script>
-        <script src="js/jquery.mobile-1.2.0.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+        <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
     </head>
     <body>
         <section id="page1" data-role="page">
@@ -20,157 +19,88 @@
                 <h1>Decorations</h1>
             </header>
             <div data-role="navbar" data-id="top navigation">
-                <div><input type="search" data-filter="true" /> <input type="button" id="search" value="Search"/></div>
                 <a href="#" id="clearstoreddata">Clear Cart</a>
                 <a href="#" id="displaydata">My Cart</a>
                 <a href="additem.html" id="addItem">Add Decor</a>
             </div>
             <div data-role="content">
-                <form action="" method="post" id="pages">
+                <ul id="error"></ul>
+                <form action="" method="post" data-role="collapsible-set">
                     Browse by...
-                    <a type="button" href="#page2" data-transition="slide">Category</a>
-                    <a type="button" href="#page3" id="colorStyleButton" data-transition="slide">Color Style</a>
-                    <a type="button" href="#page4" data-transition="slide">Multiple/Separate Colors</a>
-                    <a type="button" href="#page5" data-transition="slide">Colors</a>
-                    <a type="button" href="#page6" data-transition="slide">Order Type</a>
-                    <a type="button" href="#page7" data-transition="slide">Complete Order</a>
-                </form>
-            </div>
-            <div data-role="footer" data-position="fixed" data-id="footerNav">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="index.html" data-icon="home" data-iconpos="top">Home</a></li>
-                        <li><a href="#info" data-icon="info" data-iconpos="top">About</a></li>
-                        <li><a href="#new" data-icon="star" data-iconpos="top">New!</a></li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        <div id="page2" data-role="page" data-add-back-btn="true">
-            <fieldset>
-            <div data-role="header">
-                <h1>Choose Decorating Supplies</h1>
-            </div>
-            <div data-role="content">
-            <form action="" method="post" id="decorateTypeForm">
-                <ul>
-                    <li id="select" name="decorTypes" ><label for="type">Choose Type</label><br /></li>
-                </ul>
-            </form>
-            </div>
-            <div data-role="footer" data-position="fixed" data-id="footerNav">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="index.html" data-icon="home" data-iconpos="top">Home</a></li>
-                        <li><a href="#info" data-icon="info" data-iconpos="top">About</a></li>
-                        <li><a href="#new" data-icon="star" data-iconpos="top">New!</a></li>
-                    </ul>
-                </div>
-            </div>
-            </fieldset>
-        </div>
-        <div id="page3" data-role="page" data-add-back-btn="true">
-            <fieldset>
-            <div data-role="header">
-                <h1>Choose by Color Style</h1>
-            </div>
-            <div data-role="content">
-            <form action="" method="post" id="colorType">Color Style:
-                <ul>
-                    <li><input type="radio" value="Metallic" id="metallic" name="colorStyle" /><label for="metallic">Metallic</label></li>
-                    <li><input type="radio" value="Regular" id="regular" name="colorStyle" /><label for="regular">Regular</label></li>
-                </ul>
-            </form>
-            </div>
-            <div data-role="footer" data-position="fixed" data-id="footerNav">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="index.html" data-icon="home" data-iconpos="top">Home</a></li>
-                        <li><a href="#info" data-icon="info" data-iconpos="top">About</a></li>
-                        <li><a href="#new" data-icon="star" data-iconpos="top">New!</a></li>
-                    </ul>
-                </div>
-            </div> 
-            </fieldset>
-        </div>
-        <div id="page4" data-role="page" data-add-back-btn="true">
-            <fieldset>
-            <div data-role="header">
-                <h1>Multiple/Separate Colors?</h1>
-            </div>
-            <div data-role="content">
-            <form action="" method="post" id="colorPerPiece">Colors Per Item
-                <ul>
-                    <li><input type="radio" value="Multiple Colors" id="multiple" name="colorAmount" /><label for="multiple">Multiple Colors</label></li>
-                    <li><input type="radio" value="Separate Colors" id="separate" name="colorAmount" /><label for="separate">Separate Colors</label></li>
-                </ul>
-            </form>
-            </div>
-            <div data-role="footer" data-position="fixed" data-id="footerNav">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="index.html" data-icon="home" data-iconpos="top">Home</a></li>
-                        <li><a href="#info" data-icon="info" data-iconpos="top">About</a></li>
-                        <li><a href="#new" data-icon="star" data-iconpos="top">New!</a></li>
-                    </ul>
-                </div>
-            </div>
-            </fieldset>
-        </div>
-        <div id="page5" data-role="page" data-add-back-btn="true">
-            <fieldset>
-                <div data-role="header"><h1>
-                    Choose Color(s)</h1>
-                </div>
-                <div data-role="content">
-                <form action="" method="post" id="colorForm">
-                    <ul id="colors" data-role="listview">
-                        <input type="search" data-filter="true" />
-                        <br/>
-                        Colors:
-                        <li><input type="checkbox" value="Blue" id="blue" /><!-- <img height="100" width="100" id="BlueImage" /> --><label for="blue">Blue</label></li>
-                        <li><input type="checkbox" value="Green" id="green" /><!-- <img height="100" width="100" id="GreenImage" /> --><label for="green">Green</label></li>
-                        <li><input type="checkbox" value="Red" id="red" /><!-- <img height="100" width="100" id="RedImage" /> --><label for="red">Red</label></li>
-                        <li><input type="checkbox" value="Pink" id="pink" /><!-- <img height="100" width="100" id="PinkImage" /> --><label for="pink">Pink</label></li>
-                        <li><input type="checkbox" value="Purple" id="purple" /><!-- <img height="100" width="100" id="PurpleImage" /> --><label for="purple">Purple</label></li>
-                        <li><input type="checkbox" value="Orange" id="orange" /><!-- <img height="100" width="100" id="OrangeImage" /> --><label for="orange">Orange</label></li>
-                        <li id="blackli"><input type="checkbox" value="Black" id="black" /><!-- <img height="100" width="100" id="BlackImage" /> --><label for="black">Black</label></li>
-                        <li><input type="checkbox" value="White" id="white" /><!-- <img height="100" width="100" id="WhiteImage" /> --><label for="white">White</label></li>
-                        <li><input type="checkbox" value="Yellow" id="yellow" /><!-- <img height="100" width="100" id="YellowImage" /> --><label for="yellow">Yellow</label></li>
-                        <li id="greyli"><input type="checkbox" value="Grey" id="grey" /><!-- <img height="100" width="100" id="GreyImage" /> --><label for="grey">Grey</label></li>
-                    </ul>
-                </form>
-                </div>
-                <div data-role="footer" data-position="fixed" data-id="footerNav">
-                    <div data-role="navbar">
-                        <ul>
-                            <li><a href="index.html" data-icon="home" data-iconpos="top">Home</a></li>
-                            <li><a href="#info" data-icon="info" data-iconpos="top">About</a></li>
-                            <li><a href="#new" data-icon="star" data-iconpos="top">New!</a></li>
-                        </ul>
+                    <div id="category" data-role="collapsible" data-add-back-btn="true">
+                            <h3>Choose Decorating Supplies</h3>
+                        <form action="" method="post" id="decorateTypeForm">
+                            <ul>
+                                <li id="select" name="decorTypes" ><label for="type">Choose Type</label><br /></li>
+                            </ul>
+                        </form>
                     </div>
-                </div>
-            </fieldset>
-        </div>
-        <div id="page6" data-role="page" data-add-back-btn="true">
-            <fieldset>
-                <div data-role="header">
-                    <h1>Save Item</h1>
-                </div>
-                <div data-role="content">
-                <form action="" method="post" id="saveForm">
-                    <select id="packAmount">
-                        <option value="Business/Personal" id="Nothing">Business/Personal</option>
-                        <option value="Business" id="wholesale">Business</option>
-                        <option value="Personal" id="home">Personal</option>
-                    </select>
-                    <ul id="packs">How Many Packs Do You Want?
-                        <li><input id="howMany" type="range" min="0" max="100" value="0" step="1" onChange="sliderChange(this.value)" /></li>
-                        Packs = <span id="sliderStatus">0</span>
-                    </ul>
+                    <div id="colorStyle" data-role="collapsible" data-add-back-btn="true">
+                            <h3>Choose by Color Style</h3>
+                        <form action="" method="post" id="colorType">Color Style:
+                            <ul>
+                                <li><input type="radio" value="Metallic" id="metallic" name="colorStyle" /><label for="metallic">Metallic</label></li>
+                                <li><input type="radio" value="Regular" id="regular" name="colorStyle" /><label for="regular">Regular</label></li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div id="amountOfColor" data-role="collapsible" data-add-back-btn="true">
+                            <h3>Multiple/Separate Colors?</h3>
+                        <form action="" method="post" id="colorPerPiece">Colors Per Item
+                            <ul>
+                                <li><input type="radio" value="Multiple Colors" id="multiple" name="colorAmount" /><label for="multiple">Multiple Colors</label></li>
+                                <li><input type="radio" value="Separate Colors" id="separate" name="colorAmount" /><label for="separate">Separate Colors</label></li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div id="colorForm" data-role="collapsible" data-add-back-btn="true">
+                        <h3>Choose Color(s)</h3>
+                        <form action="" method="post">
+                            <ul id="colors" data-role="listview" data-filter="true">
+                                <br/>
+                                Colors:
+                                <li><input type="checkbox" value="Blue" id="blue" /><img height="100" width="100" id="BlueImage" /><label for="blue">Blue</label></li>
+                                <li><input type="checkbox" value="Green" id="green" /><img height="100" width="100" id="GreenImage" /><label for="green">Green</label></li>
+                                <li><input type="checkbox" value="Red" id="red" /><img height="100" width="100" id="RedImage" /><label for="red">Red</label></li>
+                                <li><input type="checkbox" value="Pink" id="pink" /><img height="100" width="100" id="PinkImage" /><label for="pink">Pink</label></li>
+                                <li><input type="checkbox" value="Purple" id="purple" /><img height="100" width="100" id="PurpleImage" /><label for="purple">Purple</label></li>
+                                <li><input type="checkbox" value="Orange" id="orange" /><img height="100" width="100" id="OrangeImage" /><label for="orange">Orange</label></li>
+                                <li id="blackli"><input type="checkbox" value="Black" id="black" /><img height="100" width="100" id="BlackImage" /><label for="black">Black</label></li>
+                                <li><input type="checkbox" value="White" id="white" /><img height="100" width="100" id="WhiteImage" /><label for="white">White</label></li>
+                                <li><input type="checkbox" value="Yellow" id="yellow" /><img height="100" width="100" id="YellowImage" /><label for="yellow">Yellow</label></li>
+                                <li id="greyli"><input type="checkbox" value="Grey" id="grey" /><img height="100" width="100" id="GreyImage" /><label for="grey">Grey</label></li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div data-role="collapsible" data-add-back-btn="true">
+                            <h3>Order Type</h3>
+                        <div id="order">
+                            <form action="" method="post" id="saveForm">
+                            <select id="packAmount">
+                                <option value="Business/Personal" id="Nothing">Business/Personal</option>
+                                <option value="Business" id="wholesale">Business</option>
+                                <option value="Personal" id="home">Personal</option>
+                            </select>
+                            <ul id="packs">How Many Packs Do You Want?
+                                <li><input id="howMany" type="range" min="0" max="100" value="0" step="1" onChange="sliderChange(this.value)" /></li>
+                                Packs = <span id="sliderStatus">0</span>
+                            </ul>
+                            </form>
+                        </div>
+                    </div>        
+                    <div id="lastPage" data-role="collapsible" data-add-back-btn="true">
+                            <h1>Extra Information</h1>
+                        <form action="" method="post" id="extraForm">
+                            <ul>
+                                <li><label for="occasion">Occasion:</label><input type="text" id="occasion"/></li>
+                                <li><label for="notes">Notes:</label><textarea id="notes"></textarea></li>
+                            </ul>
+                            <input type="button" id="save" value="Add to Cart"/>
+                        </form>
+                    </div>
                 </form>
-                </div>
-                <div data-role="footer" data-position="fixed" data-id="footerNav">
+            </div>
+            <div data-role="footer" data-position="fixed" data-id="footerNav">
                 <div data-role="navbar">
                     <ul>
                         <li><a href="index.html" data-icon="home" data-iconpos="top">Home</a></li>
@@ -178,41 +108,14 @@
                         <li><a href="#new" data-icon="star" data-iconpos="top">New!</a></li>
                     </ul>
                 </div>
-                </div>
-            </fieldset>
-        </div>
-        <div id="page7" data-role="page" data-add-back-btn="true">
-            <fieldset>
-                <div data-role="header">
-                    <h1>Extra Information</h1>
-                </div>
-                <div data-role="content">
-                <form action="" method="post">
-                    <ul id="error"></ul>
-                    <ul id="extraForm">
-                        <li><label for="occasion">Occasion:</label><input type="text" id="occasion"/></li>
-                        <li><label for="notes">Notes:</label><textarea id="notes"></textarea></li>
-                    </ul>
-                </form>
-                </div>
-                <input type="button" id="save" value="Add to Cart"/>
-                <div data-role="footer" data-position="fixed" data-id="footerNav">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="index.html" data-icon="home" data-iconpos="top">Home</a></li>
-                        <li><a href="#info" data-icon="info" data-iconpos="top">About</a></li>
-                        <li><a href="#new" data-icon="star" data-iconpos="top">New!</a></li>
-                    </ul>
-                </div>
-                </div>
-            </fieldset>
-        </div>
-        <div id="displayPage" data-role="page" style="display:none">
+            </div>
+        </section>        
+            <div id="displayData" data-role="page" style="display:none" data-add-back-btn="true">
             <br/><br/>
             <div data-role="header">
                 <h1>Edit Data</h1>
             </div>
-            <div data-role="content">
+            <div data-role="content" id="displayPage">
             </div>
             <div data-role="footer" data-position="fixed" data-id="footerNav">
                 <div data-role="navbar">
@@ -224,12 +127,12 @@
                 </div>
             </div>
         </div>
-        <section data-role="page" id="info">
+        <section data-role="page" id="info" data-add-back-btn="true">
             <div data-role="header" data-position="fixed">
                 <h1>Info<h1>
             </div>
             <div data-role="content">
-                    <a type="button" href="#gold" data-transition="slide">Gold App</a>
+                    <a type="button" href="#bronze" data-transition="slide">Bronze App</a>
                     <a type="button" href="#goldGH" data-transition="slide">Gold GitHub Page</a>
                     <a type="button" href="#bronzeGH" data-transition="slide">Bronze GitHub Page</a>
                     <a type="button" href="#repos" data-transition="slide">Repositories</a>
@@ -237,31 +140,31 @@
             <div data-role="footer" data-position="fixed" data-id="footerNav">
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="index.html#'homePage'" data-icon="home" data-iconpos="top" style="display:inline-block">Home</a></li>
-                        <li><a href="#info" data-icon="info" data-iconpos="top" style="display:inline-block" class="ui-btn-active">About</a></li>
-                        <li><a href="#new" data-icon="star" data-iconpos="top" style="display:inline-block">New!</a></li>
+                        <li><a href="index.html" data-icon="home" data-iconpos="top">Home</a></li>
+                        <li><a href="#info" data-icon="info" data-iconpos="top" class="ui-btn-active">About</a></li>
+                        <li><a href="#new" data-icon="star" data-iconpos="top">New!</a></li>
                     </ul>
                 </div>
             </div>
         </section>
-        <section data-role="page" id="gold">
+        <section data-role="page" id="bronze" data-add-back-btn="true">
             <div data-role="header" data-position="fixed">
-                <h1>Gold App<h1>
+                <h1>Bronze App<h1>
             </div>
             <div data-role="content">
-                <a href="../Bronze/index.html">Gold App</a>
+                <a href="../Bronze/index.html">Bronze App</a>
             </div>
             <div data-role="footer" data-position="fixed" data-id="footerNav">
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="index.html#'homePage'" data-icon="home" data-iconpos="top" style="display:inline-block">Home</a></li>
-                        <li><a href="#info" data-icon="info" data-iconpos="top" style="display:inline-block" class="ui-btn-active">About</a></li>
-                        <li><a href="#new" data-icon="star" data-iconpos="top" style="display:inline-block">New!</a></li>
+                        <li><a href="index.html#'homePage'" data-icon="home" data-iconpos="top">Home</a></li>
+                        <li><a href="#info" data-icon="info" data-iconpos="top" class="ui-btn-active">About</a></li>
+                        <li><a href="#new" data-icon="star" data-iconpos="top">New!</a></li>
                     </ul>
                 </div>
             </div>
         </section>
-        <section data-role="page" id="goldGH">
+        <section data-role="page" id="goldGH" data-add-back-btn="true">
             <div data-role="header" data-position="fixed">
                 <h1>Gold GitHub<h1>
             </div>
@@ -271,14 +174,14 @@
             <div data-role="footer" data-position="fixed" data-id="footerNav">
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="index.html#'homePage'" data-icon="home" data-iconpos="top" style="display:inline-block">Home</a></li>
-                        <li><a href="#info" data-icon="info" data-iconpos="top" style="display:inline-block" class="ui-btn-active">About</a></li>
-                        <li><a href="#new" data-icon="star" data-iconpos="top" style="display:inline-block">New!</a></li>
+                        <li><a href="index.html#'homePage'" data-icon="home" data-iconpos="top">Home</a></li>
+                        <li><a href="#info" data-icon="info" data-iconpos="top" class="ui-btn-active">About</a></li>
+                        <li><a href="#new" data-icon="star" data-iconpos="top">New!</a></li>
                     </ul>
                 </div>
             </div>
         </section>
-        <section data-role="page" id="bronzeGH">
+        <section data-role="page" id="bronzeGH" data-add-back-btn="true">
             <div data-role="header" data-position="fixed">
                 <h1>Bronze GitHub<h1>
             </div>
@@ -288,27 +191,28 @@
             <div data-role="footer" data-position="fixed" data-id="footerNav">
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="index.html#'homePage'" data-icon="home" data-iconpos="top" style="display:inline-block">Home</a></li>
-                        <li><a href="#info" data-icon="info" data-iconpos="top" style="display:inline-block" class="ui-btn-active">About</a></li>
-                        <li><a href="#new" data-icon="star" data-iconpos="top" style="display:inline-block">New!</a></li>
+                        <li><a href="index.html#'homePage'" data-icon="home" data-iconpos="top" >Home</a></li>
+                        <li><a href="#info" data-icon="info" data-iconpos="top" class="ui-btn-active">About</a></li>
+                        <li><a href="#new" data-icon="star" data-iconpos="top">New!</a></li>
                     </ul>
                 </div>
             </div>
         </section>
-        <section data-role="page" id="repos">
+        <section data-role="page" id="repos" data-add-back-btn="true">
             <div data-role="header" data-position="fixed">
                 <h1>Repositories<h1>
             </div>
             <div data-role="content">
                 <a href="https://github.com/Yusra718/MIU-Gold.git">Gold Repository</a>
+                <br/>
                 <a href="https://github.com/Yusra718/MIU-Bronze.git">Bronze Repository</a>
             </div>
             <div data-role="footer" data-position="fixed" data-id="footerNav">
                 <div data-role="navbar" data-id="Navibar">
                     <ul>
-                        <li><a href="index.html#'homePage'" data-icon="home" data-iconpos="top" style="display:inline-block">Home</a></li>
-                        <li><a href="#info" data-icon="info" data-iconpos="top" style="display:inline-block" class="ui-btn-active">About</a></li>
-                        <li><a href="#new" data-icon="star" data-iconpos="top" style="display:inline-block">New!</a></li>
+                        <li><a href="index.html#'homePage'" data-icon="home" data-iconpos="top">Home</a></li>
+                        <li><a href="#info" data-icon="info" data-iconpos="top" class="ui-btn-active">About</a></li>
+                        <li><a href="#new" data-icon="star" data-iconpos="top">New!</a></li>
                     </ul>
                 </div>
             </div>
@@ -317,7 +221,7 @@
             <div data-role="header" data-position="fixed">
                 <h1>New<h1>
             </div>
-            <div data-role="content"></div>
+            <div data-role="content" id="newItems"></div>
             <div data-role="footer" data-position="fixed" data-id="footerNav">
                 <div data-role="navbar">
                     <ul>
